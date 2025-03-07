@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PneumoCheck.com - Early Detection for Better Outcomes</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <i class="fas fa-lungs logo-icon"></i>PneumoCheck.com
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link active-link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#steps" class="nav__link">How It Works</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ url_for('analysis') }}" class="nav__link">Diagnose</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class="fas fa-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="home section" id="home">
+            <div class="home__container container grid">
+                <div class="home__data">
+                    <h1 class="home__title">
+                        Early Detection for <br> Better Outcomes
+                    </h1>
+                    <p class="home__description">
+                        Discover advanced AI-powered tools for pneumonia detection and monitoring. Take control of your health journey with expert insights and accurate analysis.
+                    </p>
+                    <a href="{{ url_for('analysis') }}" class="button button--flex">
+                        Start Diagnosis <i class="fas fa-arrow-right button__icon"></i>
+                    </a>
+                </div>
+
+                <div class="home__img">
+                  <img src="https://media.licdn.com/dms/image/C5612AQGaaktMBZnDaQ/article-cover_image-shrink_600_2000/0/1647508169700?e=2147483647&v=beta&t=qPMv3RLaGPViiqwZbmWn3fg5yeGBDqJmi7stFd7F2Ho" alt="Brain Scan " class="home__img">
+                </div>
+
+                <div class="home__social">
+                    <span class="home__social-follow">Connect with Us</span>
+
+                    <div class="home__social-links">
+                        <a href="https://www.facebook.com/" target="_blank" class="home__social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" class="home__social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="home__social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features section">
+            <div class="features__container container">
+                <h2 class="section__title-center">
+                    Why Choose PneumoCheck?
+                </h2>
+                
+                <div class="features__grid grid">
+                    <div class="features__card">
+                        <div class="features__card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="features__card-title">AI-Powered Analysis</h3>
+                        <p class="features__card-description">
+                            Our advanced machine learning algorithms provide accurate pneumonia detection from chest X-rays.
+                        </p>
+                    </div>
+                    
+                    <div class="features__card">
+                        <div class="features__card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="features__card-title">Fast Results</h3>
+                        <p class="features__card-description">
+                            Get analysis results in seconds, not days, allowing for quicker medical decisions.
+                        </p>
+                    </div>
+                    
+                    <div class="features__card">
+                        <div class="features__card-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="features__card-title">Secure & Private</h3>
+                        <p class="features__card-description">
+                            Your medical data is encrypted and protected with the highest security standards.
+                        </p>
+                    </div>
+                    
+                    <div class="features__card">
+                        <div class="features__card-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="features__card-title">Expert Support</h3>
+                        <p class="features__card-description">
+                            Connect with healthcare professionals for guidance on your results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section class="steps section container" id="steps">
+            <div class="steps__bg">
+                <h2 class="section__title-center steps__title">
+                    How PneumoCheck Works
+                </h2>
+
+                <div class="steps__container grid">
+                    <div class="steps__card">
+                        <div class="steps__card-number">01</div>
+                        <h3 class="steps__card-title">Upload Your X-ray</h3>
+                        <p class="steps__card-description">
+                            Simply upload your chest X-ray image. We support various image formats for your convenience.
+                        </p>
+                    </div>
+
+                    <div class="steps__card">
+                        <div class="steps__card-number">02</div>
+                        <h3 class="steps__card-title">AI Analysis</h3>
+                        <p class="steps__card-description">
+                            Our advanced AI system analyzes the image to detect signs of pneumonia with high accuracy.
+                        </p>
+                    </div>
+
+                    <div class="steps__card">
+                        <div class="steps__card-number">03</div>
+                        <h3 class="steps__card-title">Get Results & Guidance</h3>
+                        <p class="steps__card-description">
+                            Receive instant results with clear guidance on next steps based on your analysis outcome.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials section container">
+            <h2 class="section__title-center">
+                What Our Users Say
+            </h2>
+            <div class="testimonials__container swiper">
+                <div class="swiper-wrapper">
+                    <div class="testimonial__card swiper-slide">
+                        <div class="testimonial__quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial__description">
+                            "PneumoCheck helped me get a quick assessment when I was worried about my symptoms. The results prompted me to see a doctor immediately, which made all the difference in my treatment."
+                        </p>
+                        <h3 class="testimonial__name">Sarah Johnson</h3>
+                        <span class="testimonial__profession">Patient</span>
+                    </div>
+                    
+                    <div class="testimonial__card swiper-slide">
+                        <div class="testimonial__quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial__description">
+                            "As a radiologist, I'm impressed with the accuracy of PneumoCheck's AI system. It serves as an excellent screening tool that helps prioritize cases that need immediate attention."
+                        </p>
+                        <h3 class="testimonial__name">Dr. Michael Chen</h3>
+                        <span class="testimonial__profession">Radiologist</span>
+                    </div>
+                    
+                    <div class="testimonial__card swiper-slide">
+                        <div class="testimonial__quote">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p class="testimonial__description">
+                            "We've implemented PneumoCheck in our rural clinic where we don't always have a radiologist available. It's been invaluable for our initial assessments."
+                        </p>
+                        <h3 class="testimonial__name">Dr. Emily Rodriguez</h3>
+                        <span class="testimonial__profession">Family Physician</span>
+                    </div>
+                </div>
+                
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta section container">
+            <div class="cta__bg">
+                <div class="cta__container grid">
+                    <div class="cta__data">
+                        <h2 class="cta__title">Start Your Diagnosis Today</h2>
+                        <p class="cta__description">
+                            Early detection can significantly improve treatment outcomes. Upload your chest X-ray now for a quick analysis.
+                        </p>
+                        <a href="{{ url_for('analysis') }}" class="button button--flex cta__button">
+                            Get Started <i class="fas fa-arrow-right button__icon"></i>
+                        </a>
+                    </div>
+                    
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSkBes5cgTnyiYK3qwdm5MezATgczYwDnseA&s" alt="Doctor with X-ray" class="cta__img">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer section" id="contact">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <a href="#" class="footer__logo">
+                    <i class="fas fa-lungs footer__logo-icon"></i> PneumoCheck.com
+                </a>
+
+                <h3 class="footer__title">
+                    Subscribe to our newsletter <br> for updates
+                </h3>
+
+                <div class="footer__subscribe">
+                    <input type="email" placeholder="Enter your email" class="footer__input">
+
+                    <button class="button button--flex footer__button">
+                        Subscribe
+                        <i class="fas fa-arrow-right button__icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Our Address</h3>
+
+                <ul class="footer__data">
+                    <li class="footer__information">123 Medical Center Drive</li>
+                    <li class="footer__information">San Francisco, CA 94158</li>
+                    <li class="footer__information">United States</li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Contact Us</h3>
+
+                <ul class="footer__data">
+                    <li class="footer__information">+1 (555) 123-4567</li>
+                    <li class="footer__information">info@pneumocheck.com</li>
+
+                    <div class="footer__social">
+                        <a href="https://www.facebook.com/" class="footer__social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" class="footer__social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/" class="footer__social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">
+                    We accept all major payment methods
+                </h3>
+
+                <div class="footer__cards">
+                    <img src="{{ url_for('static', filename='assets/img/card1.png') }}" alt="Visa" class="footer__card">
+                    <img src="{{ url_for('static', filename='assets/img/card2.png') }}" alt="Mastercard" class="footer__card">
+                    <img src="{{ url_for('static', filename='assets/img/card3.png') }}" alt="PayPal" class="footer__card">
+                    <img src="{{ url_for('static', filename='assets/img/card4.png') }}" alt="American Express" class="footer__card">
+                </div>
+            </div>
+        </div>
+
+        <p class="footer__copy">© 2023 PneumoCheck.com. All rights reserved</p>
+    </footer>
+
+    <!-- Scroll Up Button -->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="fas fa-arrow-up scrollup__icon"></i>
+    </a>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

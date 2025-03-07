@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Analysis - PneumoCheck.com</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="{{ url_for('home') }}" class="nav__logo">
+                <i class="fas fa-lungs logo-icon"></i>PneumoCheck.com
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="{{ url_for('home') }}#home" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ url_for('home') }}#steps" class="nav__link">How It Works</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ url_for('analysis') }}" class="nav__link active-link">Diagnose</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ url_for('home') }}#contact" class="nav__link">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+
+            <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class="fas fa-moon change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="analysis section container">
+            <div class="analysis__container">
+                <h1 class="section__title-center">Pneumonia Detection</h1>
+                
+                <div class="analysis__content">
+                    <div class="analysis__upload">
+                        <h2 class="analysis__subtitle">Upload Your Chest X-ray</h2>
+                        <p class="analysis__description">
+                            Upload a clear image of your chest X-ray for analysis. Our AI system will process the image and provide results within seconds.
+                        </p>
+                        
+                        <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data" class="analysis__form">
+                            <div class="file-upload">
+                                <div class="file-upload-preview" id="file-preview">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Drag & drop your image here or click to browse</p>
+                                </div>
+                                <input type="file" name="file" id="file-input" accept="image/*" required>
+                            </div>
+                            
+                            <button type="submit" class="button button--flex analysis__button">
+                                Analyze Image <i class="fas fa-microscope button__icon"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    {% if prediction %}
+                    <div class="analysis__result">
+                        <h2 class="analysis__subtitle">Analysis Results</h2>
+                        
+                        <div class="result__container">
+                            <div class="result__image-container">
+                                <img src="{{ uploaded_image }}" alt="Uploaded X-ray" class="result__image">
+                            </div>
+                            
+                            <div class="result__details">
+                                <div class="result__status {{ 'result__status--negative' if prediction != 'Pneumonia' else 'result__status--positive' }}">
+                                    <i class="fas {{ 'fa-check-circle' if prediction != 'Pneumonia' else 'fa-exclamation-circle' }}"></i>
+                                    <h3>{{ 'No Pneumonia Detected' if prediction != 'Pneumonia' else 'Pneumonia Detected' }}</h3>
+                                </div>
+                                
+                                <div class="result__description">
+                                    {% if prediction == 'Pneumonia' %}
+                                    <p>Our AI system has detected patterns consistent with pneumonia in the uploaded X-ray. Please consult with a healthcare professional for a definitive diagnosis and treatment plan.</p>
+                                    {% else %}
+                                    <p>Our AI system did not detect patterns consistent with pneumonia in the uploaded X-ray. However, if you're experiencing symptoms, please consult with a healthcare professional.</p>
+                                    {% endif %}
+                                </div>
+                                
+                                {% if prediction == 'Pneumonia' %}
+                                <div class="result__recommendations">
+                                    <h4>Recommended Next Steps:</h4>
+                                    <ul>
+                                        <li><i class="fas fa-user-md"></i> Consult with a healthcare professional immediately</li>
+                                        <li><i class="fas fa-pills"></i> Follow prescribed medication and treatment plans</li>
+                                        <li><i class="fas fa-bed"></i> Rest and stay hydrated</li>
+                                        <li><i class="fas fa-chart-line"></i> Monitor symptoms and seek immediate help if they worsen</li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                
+                                <div class="result__disclaimer">
+                                    <p><i class="fas fa-info-circle"></i> Disclaimer: This analysis is for informational purposes only and should not replace professional medical advice, diagnosis, or treatment.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result__actions">
+                            <a href="{{ url_for('analysis') }}" class="button button--outline">
+                                <i class="fas fa-redo"></i> Analyze Another Image
+                            </a>
+                            <a href="#" class="button button--flex" id="download-report">
+                                <i class="fas fa-download"></i> Download Report
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="analysis__info">
+                    <div class="info__card">
+                        <div class="info__icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Privacy Protected</h3>
+                        <p>Your medical data and images are encrypted and never shared with third parties.</p>
+                    </div>
+                    
+                    <div class="info__card">
+                        <div class="info__icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>95% Accuracy</h3>
+                        <p>Our AI model has been trained on thousands of X-rays with a high accuracy rate.</p>
+                    </div>
+                    
+                    <div class="info__card">
+                        <div class="info__icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3>Medical Support</h3>
+                        <p>Connect with healthcare professionals for guidance on your results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <a href="{{ url_for('home') }}" class="footer__logo">
+                    <i class="fas fa-lungs footer__logo-icon"></i> PneumoCheck.com
+                </a>
+
+                <h3 class="footer__title">
+                    Subscribe to our newsletter <br> for updates
+                </h3>
+
+                <div class="footer__subscribe">
+                    <input type="email" placeholder="Enter your email" class="footer__input">
+
+                    <button class="button button--flex footer__button">
+                        Subscribe
+                        <i class="fas fa-arrow-right button__icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Our Address</h3>
+
+                <ul class="footer__data">
+                    <li class="footer__information">123 Medical Center Drive</li>
+                    <li class="footer__information">San Francisco, CA 94158</li>
+                    <li class="footer__information">United States</li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Contact Us</h3>
+
+                <ul class="footer__data">
+                    <li class="footer__information">+1 (555) 123-4567</li>
+                    <li class="footer__information">info@pneumocheck.com</li>
+
+                    <div class="footer__social">
+                        <a href="https://www.facebook.com/" class="footer__social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" class="footer__social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/" class="footer__social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">
+                    We accept all major payment methods
+                </h3>
+
+                <div class="footer__cards">
+                    <img src="{{ url_for('static', filename='assets/img/card1.png') }}" alt="Visa" class="footer__card">
+                    <img src="{{ url_for('static', filename='assets/img/card2.png') }}" alt="Mastercard" class="footer__card">
+                    <img src="{{ url_for('static', filename='assets/img/card3.png') }}" alt="PayPal" class="footer__card">
+                    <img src="{{ url_for('static', filename='assets/img/card4.png') }}" alt="American Express" class="footer__card">
+                </div>
+            </div>
+        </div>
+
+        <p class="footer__copy">© 2023 PneumoCheck.com. All rights reserved</p>
+    </footer>
+
+    <!-- Scroll Up Button -->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="fas fa-arrow-up scrollup__icon"></i>
+    </a>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+</body>
+</html>
