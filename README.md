@@ -22,7 +22,7 @@ All the required libraries, dataset link are also mentioned in the [Colab notebo
 👉 [<button>Reference</button>](https://link.springer.com/article/10.1007/s12652-021-03075-2)
 
 # How to run?
-Install dependencies using pip
+### Install dependencies using pip
 and activate flask and run app using command
 bash
 copy code
