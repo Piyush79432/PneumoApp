@@ -23,11 +23,11 @@ All the required libraries, dataset link are also mentioned in the [Colab notebo
 
 # How to run?
 ### Install dependencies using pip
-### 2. Run using Flsk
+### 2. Run using Flask
 Run the training script to build and save your model:
 ```bash
 python app.py
-
+```
 Hope this helps🙂.
 
 Thank you..
