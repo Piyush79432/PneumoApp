@@ -1,5 +1,5 @@
 
-# Pneumonia-detection-using-CNN
+# Pneumonia-detection-using-CNN  # PneumoApp
 
 Pneumonia infection is a serious disease of the lungs with a range of possible causes. Bacteria, viruses or fungi can cause Pneumonia infection. Pneumonia is ranked as eighth leading for causing more no. of deaths in the US, It causes death in children younger than five years of age worldwide. To save precious lives of many people, humans and technology should interact.
 
@@ -25,5 +25,3 @@ Hope this helps🙂.
 
 Thank you..
 =======
-# PneumoApp
->>>>>>> 41eaf57e0e5bf57dee2975f15dc23d2a5407450a
